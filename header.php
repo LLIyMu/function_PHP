@@ -1,22 +1,21 @@
-<?php 
-    require_once 'db.php';
-    require_once 'function.php';
+<?php
+require_once 'db.php';
+require_once 'function.php';
 ?>
 <?php
-    
+
 //Если  не существует куки записываем в сессию данные
 if (!isset($_COOKIE['email'])) {
     $email = $_SESSION['email'];     //Записываю в переменную почту из сессии
     $name = $_SESSION['name'];       //Записываю в переменную имя из сессии
     $user_id = $_SESSION['user_id']; //Записываю в переменную ID из сессии
-    $image_user = $_SESSION['user_img'];//Записываю в переменную имя и расширение картинки полученное из БД
-    
+    $image_user = $_SESSION['user_img']; //Записываю в переменную имя и расширение картинки полученное из БД
+
 } else { // Иначе записываю в куки
     $email = $_COOKIE['email'];
     $name = $_COOKIE['name'];
     $user_id = $_COOKIE['user_id'];
     $image_user = $_COOKIE['user_img'];
-    
 }
 
 ?>
@@ -71,15 +70,12 @@ if (!isset($_COOKIE['email'])) {
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="profile.php">Профиль</a>
                                     <!-- если в сессии есть админ, выводим для него вкладку -->
-                                    <?php if($_SESSION['role'] == 1): ?>
-                                    <a class="dropdown-item" href="admin.php">Админ панель</a>
+                                    <?php if ($_SESSION['role'] == 1) : ?>
+                                        <a class="dropdown-item" href="admin.php">Админ панель</a>
                                     <?php endif; ?>
                                     <a class="dropdown-item" href="logout.php">Выход</a>
                                 </div>
-                            </div
-                        
-                        <?php else : ?>
-                            <!-- Иначе, вывожу меню для авторизации, регистрации -->
+                            </div <?php else : ?> <!-- Иначе, вывожу меню для авторизации, регистрации -->
                             <li class="nav-item">
                                 <a class="nav-link" href="login.php">Login</a>
                             </li>
@@ -91,3 +87,9 @@ if (!isset($_COOKIE['email'])) {
                 </div>
             </div>
         </nav>
+        <?php if (isset($_SESSION['success'])) : ?>
+            <div class="alert alert-success" role="alert">
+                <?= $_SESSION['success']; ?>
+            </div>
+        <? unset($_SESSION['success']);
+        endif; ?>

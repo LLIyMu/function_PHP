@@ -38,7 +38,6 @@ function img_upload($image, $image_user, $validate) {
     
     $filename = uniqid() . "." . $extention; // Задаю уникальное имя файла и присваиваю его переменной
     
-    
 }
 if (!in_array($extention , $avialabelExtention)) {
 

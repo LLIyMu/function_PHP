@@ -32,7 +32,7 @@ if (!empty($pass_cur) && !empty($password) && !empty($pass_conf)) {
         if (strlen($password) < 6) {
 
             $_SESSION['passErr'] = 'Пароль меньше 6 символов';// Сообщение об ощибке
-            header( 'location: /profile.php');                 //Редирект обратно
+            header('location: /profile.php');                 //Редирект обратно
         } 
 
         if ($password !== $pass_conf) {
@@ -56,4 +56,7 @@ if (!empty($pass_cur) && !empty($password) && !empty($pass_conf)) {
         $_SESSION['pass_succes'] = 'Пароль обновлён'; // Сообщение об успешном изменении пароля
         header("Location:/profile.php");              // Редирект обратно на профиль
         exit;
+} else {
+    $_SESSION['passErr'] = 'Поля пустые, заполните их'; // Сообщение о неверном пароле
+    header('location: /profile.php');
 }

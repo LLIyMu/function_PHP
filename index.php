@@ -36,9 +36,7 @@ $comments = $pdo->query('SELECT form.*, users.name, users.image FROM form LEFT J
                                     </p>
                                 </div>
                             </div>
-                            <?php endif;  endforeach; ?>
-                            
-                            
+                            <?php endif;  endforeach; ?>      
                     </div>
                 </div>
             </div>
@@ -84,5 +82,4 @@ $comments = $pdo->query('SELECT form.*, users.name, users.image FROM form LEFT J
 </main>
 </div>
 </body>
-<? dd($_SESSION['role']); ?>
 </html>
