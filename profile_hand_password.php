@@ -22,7 +22,7 @@ function check_user($pdo, $email) {
 //Проверяю поля формы на пустоту
 if (!empty($pass_cur) && !empty($password) && !empty($pass_conf)) {
 
-  
+    
     $result_user = check_user($pdo, $email); //Передаю параметры функции, что бы получить существующего пользователя
 
     //Если введённый пароль совпадает с паролем из сесии
@@ -31,17 +31,17 @@ if (!empty($pass_cur) && !empty($password) && !empty($pass_conf)) {
         //Проверка пароля на количество символов
         if (strlen($password) < 6) {
 
-            $_SESSION['passErr'] = 'Пароль меньше 6 символов';// Сообщение об ощибке
+            $_SESSION['pass_err'] = 'Пароль меньше 6 символов';// Сообщение об ощибке
             header('location: /profile.php');                 //Редирект обратно
         } 
 
         if ($password !== $pass_conf) {
 
-            $_SESSION['passErr'] = 'Пароли не совпадают';// Сообщение об ощибке
+            $_SESSION['pass_err'] = 'Пароли не совпадают';// Сообщение об ощибке
             header('location: /profile.php');            //Редирект обратно
         }
     } else {
-        $_SESSION['passErr'] = 'Вы ввели неверный пароль';// Сообщение о неверном пароле
+        $_SESSION['pass_err'] = 'Вы ввели неверный пароль';// Сообщение о неверном пароле
         header('location: /profile.php');                 // Редирект на профиль
     }
 
@@ -57,6 +57,6 @@ if (!empty($pass_cur) && !empty($password) && !empty($pass_conf)) {
         header("Location:/profile.php");              // Редирект обратно на профиль
         exit;
 } else {
-    $_SESSION['passErr'] = 'Поля пустые, заполните их'; // Сообщение о неверном пароле
+    $_SESSION['pass_err'] = 'Поля пустые, заполните их'; // Сообщение о неверном пароле
     header('location: /profile.php');
 }

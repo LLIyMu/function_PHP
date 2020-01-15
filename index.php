@@ -11,11 +11,20 @@ $comments = $pdo->query('SELECT form.*, users.name, users.image FROM form LEFT J
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
+                    <!-- сообщение об успешной авторизации -->
+                    <?php if (isset($_SESSION['success'])) : ?>
+                        <div class="alert alert-success" role="alert">
+                            <?= $_SESSION['success']; ?>
+                        </div>
+                    <? unset($_SESSION['success']);
+                    endif; ?>
+
                     <div class="card-header">
                         <h3>Комментарии</h3>
                     </div>
 
-                    <div class="card-body">        <!-- Если сессия пустая добавляю класс d-none для скрытия этого флеш сообщения -->
+                    <div class="card-body">
+                        <!-- Если сессия пустая добавляю класс d-none для скрытия этого флеш сообщения -->
                         <div class="alert alert-success <? if (empty($_SESSION['alert'])) : echo 'd-none' ?><? endif; ?>" role="alert">
                             <? //Добавляю сообщение о добавлении комментария
                             if (isset($_SESSION['alert'])) { //Если сессия существует вывожу сообщение
@@ -25,18 +34,19 @@ $comments = $pdo->query('SELECT form.*, users.name, users.image FROM form LEFT J
                             ?>
                         </div>
 
-                        <?php foreach ($comments as $comment) :  if ($comment['skip'] !== 1): ?>
-                            <div class="media">
-                                <img src="img/<?= $comment['image'] ?>" class="mr-3" alt="..." width="64" height="64">
-                                <div class="media-body">
-                                    <h5 class="mt-0"><?= $comment['name'] ?></h5>
-                                    <span><small><?= date('d/m/Y', strtotime($comment['date'])) ?></small></span>
-                                    <p>
-                                        <?= $comment['text'] ?>
-                                    </p>
+                        <?php foreach ($comments as $comment) :  if ($comment['skip'] !== 1) : ?>
+                                <div class="media">
+                                    <img src="img/<?= $comment['image'] ?>" class="mr-3" alt="..." width="64" height="64">
+                                    <div class="media-body">
+                                        <h5 class="mt-0"><?= $comment['name'] ?></h5>
+                                        <span><small><?= date('d/m/Y', strtotime($comment['date'])) ?></small></span>
+                                        <p>
+                                            <?= $comment['text'] ?>
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <?php endif;  endforeach; ?>      
+                        <?php endif;
+                        endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -58,10 +68,10 @@ $comments = $pdo->query('SELECT form.*, users.name, users.image FROM form LEFT J
                                     <textarea name="text" class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
                                     <div class="alert alert-danger <? if (empty($_SESSION['text'])) : echo 'd-none' ?><? endif; ?> " role="alert">
                                         <? //Add alert message user
-                                            if (isset($_SESSION['text'])) {
-                                                echo $_SESSION['text'];
-                                                unset($_SESSION['text']);
-                                            }
+                                        if (isset($_SESSION['text'])) {
+                                            echo $_SESSION['text'];
+                                            unset($_SESSION['text']);
+                                        }
                                         ?>
                                     </div>
                                 </div>
@@ -82,4 +92,5 @@ $comments = $pdo->query('SELECT form.*, users.name, users.image FROM form LEFT J
 </main>
 </div>
 </body>
+
 </html>

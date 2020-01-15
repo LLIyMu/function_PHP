@@ -87,9 +87,3 @@ if (!isset($_COOKIE['email'])) {
                 </div>
             </div>
         </nav>
-        <?php if (isset($_SESSION['success'])) : ?>
-            <div class="alert alert-success" role="alert">
-                <?= $_SESSION['success']; ?>
-            </div>
-        <? unset($_SESSION['success']);
-        endif; ?>

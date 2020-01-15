@@ -16,15 +16,15 @@ require_once('header.php');
 
                                         <div class="col-md-6">
                                             <input id="name" type="text" class="form-control
-                                             <? if (isset($_SESSION['nameErr'])) : ?>is-invalid<? endif; ?>" name="name" autofocus required>
+                                             <? if (isset($_SESSION['name_err'])) : ?>is-invalid<? endif; ?>" name="name" autofocus required>
 
-                                            <? if (isset($_SESSION['nameErr'])) : ?>
+                                            <? if (isset($_SESSION['name_err'])) : ?>
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
-                                                        <?= $_SESSION['nameErr']; ?>
+                                                        <?= $_SESSION['name_err']; ?>
                                                     </strong>
                                                 </span>
-                                            <? unset($_SESSION['nameErr']);
+                                            <? unset($_SESSION['name_err']);
                                             endif;
                                             ?>
                                         </div>
@@ -35,16 +35,16 @@ require_once('header.php');
 
                                         <div class="col-md-6">
                                             <input id="email" type="email" class="form-control
-                                              <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" required>
+                                              <? if (isset($_SESSION['email_err'])) : ?>is-invalid<? endif; ?>" name="email" required>
 
 
-                                            <? if (isset($_SESSION['emailErr'])) : ?>
+                                            <? if (isset($_SESSION['email_err'])) : ?>
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
-                                                        <?= $_SESSION['emailErr']; ?>
+                                                        <?= $_SESSION['email_err']; ?>
                                                     </strong>
                                                 </span>
-                                            <? unset($_SESSION['emailErr']);
+                                            <? unset($_SESSION['email_err']);
                                             endif;
                                             ?>
 
@@ -56,15 +56,15 @@ require_once('header.php');
 
                                         <div class="col-md-6">
                                             <input id="password" type="password" class="form-control 
-                                             <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="password" autocomplete="new-password" required>
+                                             <? if (isset($_SESSION['pass_err'])) : ?>is-invalid<? endif; ?>" name="password" autocomplete="new-password" required>
 
-                                            <? if (isset($_SESSION['passErr'])) : ?>
+                                            <? if (isset($_SESSION['pass_err'])) : ?>
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
-                                                        <?= $_SESSION['passErr']; ?>
+                                                        <?= $_SESSION['pass_err']; ?>
                                                     </strong>
                                                 </span>
-                                            <? unset($_SESSION['passErr']);
+                                            <? unset($_SESSION['pass_err']);
                                             endif;
                                             ?>
                                         </div>
@@ -75,14 +75,14 @@ require_once('header.php');
 
                                         <div class="col-md-6">
                                             <input id="password-confirm" type="password" class="form-control
-                                             <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="pass_confirm" autocomplete="new-password" required>
-                                            <? if (isset($_SESSION['passErr'])) : ?>
+                                             <? if (isset($_SESSION['pass_err'])) : ?>is-invalid<? endif; ?>" name="pass_confirm" autocomplete="new-password" required>
+                                            <? if (isset($_SESSION['pass_err'])) : ?>
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>
-                                                        <?= $_SESSION['passErr']; ?>
+                                                        <?= $_SESSION['pass_err']; ?>
                                                     </strong>
                                                 </span>
-                                            <? unset($_SESSION['passErr']);
+                                            <? unset($_SESSION['pass_err']);
                                             endif;
                                             ?>
                                         </div>

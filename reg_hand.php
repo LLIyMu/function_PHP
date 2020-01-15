@@ -22,7 +22,7 @@ if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)) 
     
 
         if(strLen($name) < 5) { // проверка на минимальное количество символов
-        $_SESSION['nameErr'] = 'Не меньше 5 символов';
+        $_SESSION['name_err'] = 'Не меньше 5 символов';
         header('location:/register.php');
         
         exit;
@@ -30,25 +30,25 @@ if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)) 
     }   // проверяю ввод email на допустимые символы
         elseif (!preg_match('#^([a-z0-9_.-]{1,20}+)@([a-z0-9_.-]+)\.([a-z\.]{2,10})$#', $email)) {
          
-        $_SESSION['emailErr'] = 'Укажите правильный email';
+        $_SESSION['email_err'] = 'Укажите правильный email';
         header('location:/register.php');
         exit;
         
     } elseif ($stmt_check->fetchColumn()) { //проверяю email на уже существующий
-        $_SESSION['emailErr'] = 'Такой email уже зарегистрирован ранее';
+        $_SESSION['email_err'] = 'Такой email уже зарегистрирован ранее';
         header('location:/register.php');
         exit;
     } elseif (strLen($password) < 6) { // проверка на минимальное количество символов
-        $_SESSION['passErr'] = 'Пароль меньше 6 символов';
+        $_SESSION['pass_err'] = 'Пароль меньше 6 символов';
         header('location:/register.php');
         exit;
     } elseif (strLen($pass_conf) < 6) { // проверка на минимальное количество символов
-        $_SESSION['passErr'] = 'Пароль меньше 6 символов';
+        $_SESSION['pass_err'] = 'Пароль меньше 6 символов';
         header('location:/register.php');
         exit;
     } elseif ($password !== $pass_conf) { //проверяю совпадают ли пароли
         
-        $_SESSION['passErr'] = 'Пароли не совпадают';
+        $_SESSION['pass_err'] = 'Пароли не совпадают';
         header('location:/register.php');
         exit;
     } else {
@@ -61,7 +61,7 @@ if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)) 
         exit;
     }
 } else {
-    $_SESSION['loginErr'] = 'Заполните обязательные поля';
+    $_SESSION['login_err'] = 'Заполните обязательные поля';
     exit;
 }
 /* 1. Получаем данные из полей
