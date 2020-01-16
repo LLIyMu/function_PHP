@@ -31,17 +31,17 @@ if (!empty($pass_cur) && !empty($password) && !empty($pass_conf)) {
         //Проверка пароля на количество символов
         if (strlen($password) < 6) {
 
-            $_SESSION['pass_err'] = 'Пароль меньше 6 символов';// Сообщение об ощибке
+            $_SESSION['passErr'] = 'Пароль меньше 6 символов';// Сообщение об ощибке
             header('location: /profile.php');                 //Редирект обратно
         } 
 
         if ($password !== $pass_conf) {
 
-            $_SESSION['pass_err'] = 'Пароли не совпадают';// Сообщение об ощибке
+            $_SESSION['passErr'] = 'Пароли не совпадают';// Сообщение об ощибке
             header('location: /profile.php');            //Редирект обратно
         }
     } else {
-        $_SESSION['pass_err'] = 'Вы ввели неверный пароль';// Сообщение о неверном пароле
+        $_SESSION['passErr'] = 'Вы ввели неверный пароль';// Сообщение о неверном пароле
         header('location: /profile.php');                 // Редирект на профиль
     }
 
@@ -53,10 +53,10 @@ if (!empty($pass_cur) && !empty($password) && !empty($pass_conf)) {
         $stmt = $pdo->prepare($sql);                                   //Подготовленный запрос
         $stmt->execute($values);                                       //Получаю обновлённые значения
 
-        $_SESSION['pass_succes'] = 'Пароль обновлён'; // Сообщение об успешном изменении пароля
+        $_SESSION['passSucces'] = 'Пароль обновлён'; // Сообщение об успешном изменении пароля
         header("Location:/profile.php");              // Редирект обратно на профиль
         exit;
 } else {
-    $_SESSION['pass_err'] = 'Поля пустые, заполните их'; // Сообщение о неверном пароле
+    $_SESSION['passErr'] = 'Поля пустые, заполните их'; // Сообщение о неверном пароле
     header('location: /profile.php');
 }

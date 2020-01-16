@@ -16,3 +16,16 @@ function get_comments($pdo) {//функция вывода комментари�
      return $comments;
 }
 
+function get_message() {//функция вывода сообщений
+    $message = false;
+    
+    if (   isset($_SESSION['alert']) || isset($_SESSION['text']) || isset($_SESSION['success'])
+        || isset($_SESSION['emailErr'])|| isset($_SESSION['passErr']) || isset($_SESSION['passSucces'])
+        || isset($_SESSION['errImg']) ||
+           isset($_SESSION['successName']) || isset($_SESSION['nameErr']) || isset($_SESSION['loginErr'])) {
+
+            $message = true;
+
+            return $message;
+    }
+}

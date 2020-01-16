@@ -103,11 +103,11 @@ if (!isset($_COOKIE['email'])) {
                             </div>
 
                             <div class="card-body">
-                                <?php if (isset($_SESSION['success_name'])) : ?>
+                                <?php if (isset($_SESSION['successName'])) : ?>
                                     <div class="alert alert-success" role="alert">
-                                        <?= $_SESSION['success_name']; ?>
+                                        <?= $_SESSION['successName']; ?>
                                     </div>
-                                <? unset($_SESSION['success_name']);
+                                <? unset($_SESSION['successName']);
                                 endif;
                                 ?>
 
@@ -116,46 +116,46 @@ if (!isset($_COOKIE['email'])) {
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Новое имя</label>
-                                                <input type="text" class="form-control <? if (isset($_SESSION['name_err'])) : ?> is-invalid<? endif; ?>" name="name" id="exampleFormControlInput1" value="<?php echo $_SESSION['name'] ?>">
+                                                <input type="text" class="form-control <? if (isset($_SESSION['nameErr'])) : ?> is-invalid<? endif; ?>" name="name" id="exampleFormControlInput1" value="<?php echo $_SESSION['name'] ?>">
 
-                                                <? if (isset($_SESSION['name_err'])) : ?>
+                                                <? if (isset($_SESSION['nameErr'])) : ?>
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>
-                                                            <?= $_SESSION['name_err']; ?>
+                                                            <?= $_SESSION['nameErr']; ?>
                                                         </strong>
                                                     </span>
-                                                <? unset($_SESSION['name_err']);
+                                                <? unset($_SESSION['nameErr']);
                                                 endif;
                                                 ?>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Изменить Email</label>
-                                                <input type="text" class="form-control <? if (isset($_SESSION['email_err'])) : ?>is-invalid<? endif; ?>" name="email" value="<?php echo $_SESSION['email']; ?>">
+                                                <input type="text" class="form-control <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" value="<?php echo $_SESSION['email']; ?>">
 
 
-                                                <? if (isset($_SESSION['email_err'])) : ?>
+                                                <? if (isset($_SESSION['emailErr'])) : ?>
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>
-                                                            <?= $_SESSION['email_err']; ?>
+                                                            <?= $_SESSION['emailErr']; ?>
                                                         </strong>
                                                     </span>
-                                                <? unset($_SESSION['email_err']);
+                                                <? unset($_SESSION['emailErr']);
                                                 endif;
                                                 ?>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Добавить аватар</label>
-                                                <input type="file" class="form-control <? if (isset($_SESSION['err_img'])) : ?>is-invalid<? endif; ?>" name="image" id="exampleFormControlInput1">
+                                                <input type="file" class="form-control <? if (isset($_SESSION['errImg'])) : ?>is-invalid<? endif; ?>" name="image" id="exampleFormControlInput1">
 
-                                                <? if (isset($_SESSION['err_img'])) : ?>
+                                                <? if (isset($_SESSION['errImg'])) : ?>
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>
-                                                            <?= $_SESSION['err_img']; ?>
+                                                            <?= $_SESSION['errImg']; ?>
                                                         </strong>
                                                     </span>
-                                                <? unset($_SESSION['err_img']);
+                                                <? unset($_SESSION['errImg']);
                                                 endif;
                                                 ?>
                                             </div>
@@ -181,20 +181,20 @@ if (!isset($_COOKIE['email'])) {
                             </div>
 
                             <div class="card-body">
-                                <?php if (isset($_SESSION['pass_succes'])) : ?>
+                                <?php if (isset($_SESSION['passSucces'])) : ?>
 
                                     <div class="alert alert-success" role="alert">
-                                        <?= $_SESSION['pass_succes']; ?>
+                                        <?= $_SESSION['passSucces']; ?>
                                     </div>
 
-                                    <?php unset($_SESSION['pass_succes']); ?>
-                                <?php elseif (isset($_SESSION['pass_err'])) :  ?>
+                                    <?php unset($_SESSION['passSucces']); ?>
+                                <?php elseif (isset($_SESSION['passErr'])) :  ?>
 
                                     <div class="alert alert-danger" role="alert">
-                                        <?= $_SESSION['pass_err']; ?>
+                                        <?= $_SESSION['passErr']; ?>
                                     </div>
 
-                                <?php unset($_SESSION['pass_err']);
+                                <?php unset($_SESSION['passErr']);
                                 endif; ?>
                                 <form action="profile_hand_password.php" method="post">
                                     <div class="row">

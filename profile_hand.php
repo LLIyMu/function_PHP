@@ -44,13 +44,13 @@ function img_upload($image, $image_user, $validate) {
 
     if ($_FILES['image']['error'] > 0 && $_FILES['image']['error'] != 4) {
 
-        $_SESSION['err_img'] = 'При загрузке произошла ошибка';
+        $_SESSION['errImg'] = 'При загрузке произошла ошибка';
         return false;
     } 
 
     if (!in_array($extention , $avialabelExtention)) {
 
-        $_SESSION['err_img'] = 'Неверное расширение, для загрузки используйте: ' . implode(', ' , $avialabelExtention);
+        $_SESSION['errImg'] = 'Неверное расширение, для загрузки используйте: ' . implode(', ' , $avialabelExtention);
         return false;
     } 
 
@@ -89,7 +89,7 @@ if (!empty($email) && ($email != $_SESSION['email'])) { //если поле emai
     //проверяю email на допустимые символы
     if (!preg_match('#^([a-z0-9_.-]{1,20}+)@([a-z0-9_.-]+)\.([a-z\.]{2,10})$#', $email)) {
 
-        $_SESSION['email_err'] = 'Неправильный формат email'; // записываю в сессию ошибку валидации
+        $_SESSION['emailErr'] = 'Неправильный формат email'; // записываю в сессию ошибку валидации
         $validate = 0; // валидация не пройдена (false)
     
   }
@@ -99,7 +99,7 @@ $result_email = check_email($pdo, $email); // передаю параметры 
   
 if ($result_email && isset($email)) { // если есть данные из переменной И существует введенный емайл через форму
 
-    $_SESSION['email_err'] = 'Такой email уже зарегестрирован'; //записываю сообщение в сессию
+    $_SESSION['emailErr'] = 'Такой email уже зарегестрирован'; //записываю сообщение в сессию
     $validate = 0; // валидация не пройдена (false)
 }
 
@@ -130,7 +130,7 @@ if($validate == 1) { //если валидация пройдена (true)
     $_SESSION['user_img'] = $data['image'];//перезаписываю в data полученное из БД название
                                            //картинки и расширение в место заглушки
     
-    $_SESSION['success_name'] = 'Профиль успешно изменен'; //сообщение о успешном изменении профиля
+    $_SESSION['successName'] = 'Профиль успешно изменен'; //сообщение о успешном изменении профиля
 
     if (isset($_COOKIE['email'])) { //Если существует кука с емайл из БД
 
