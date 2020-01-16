@@ -1,15 +1,15 @@
-<?php 
-    require_once 'db.php';
-    require_once 'function.php';
+<?php
+require_once 'db.php';
+require_once 'function.php';
 ?>
 <?php
-    
+
 //Если  не существует куки записываем в сессию данные
 if (!isset($_COOKIE['email'])) {
     $email = $_SESSION['email'];     //Записываю в переменную почту из сессии
     $name = $_SESSION['name'];       //Записываю в переменную имя из сессии
     $user_id = $_SESSION['user_id']; //Записываю в переменную ID из сессии
-    $image_user = $_SESSION['user_img'];//Записываю в переменную имя и расширение картинки полученное из БД
+    $image_user = $_SESSION['user_img']; //Записываю в переменную имя и расширение картинки полученное из БД
     $role = $_SESSION['role'];
 } else { // Иначе записываю в куки
     $email = $_COOKIE['email'];
@@ -74,15 +74,12 @@ if (!isset($email) || (isset($email) && $role != 1)) {
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="profile.php">Профиль</a>
                                     <!-- если в сессии есть админ, выводим для него вкладку -->
-                                    <?php if($_SESSION['role'] == 1): ?>
-                                    <a class="dropdown-item" href="admin.php">Админ панель</a>
+                                    <?php if ($_SESSION['role'] == 1) : ?>
+                                        <a class="dropdown-item" href="admin.php">Админ панель</a>
                                     <?php endif; ?>
                                     <a class="dropdown-item" href="logout.php">Выход</a>
                                 </div>
-                            </div
-                        
-                        <?php else : ?>
-                            <!-- Иначе, вывожу меню для авторизации, регистрации -->
+                            </div <?php else : ?> <!-- Иначе, вывожу меню для авторизации, регистрации -->
                             <li class="nav-item">
                                 <a class="nav-link" href="login.php">Login</a>
                             </li>
@@ -95,21 +92,17 @@ if (!isset($email) || (isset($email) && $role != 1)) {
             </div>
         </nav>
 
-<?php
-//вывод комментариев
-
-//Объединяю таблицы для вывода имени аторизованного пользователя, текста, картинки и даты комментария  
-$comments = $pdo->query('SELECT form.*, users.name, users.image FROM form LEFT JOIN users
-                         ON form.user_id = users.id ORDER BY form.id DESC')->fetchAll();?>
         <main class="py-4">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header"><h3>Админ панель</h3></div>
+                            <div class="card-header">
+                                <h3>Админ панель</h3>
+                            </div>
 
                             <div class="card-body">
-                                
+
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -122,34 +115,33 @@ $comments = $pdo->query('SELECT form.*, users.name, users.image FROM form LEFT J
                                     </thead>
 
                                     <tbody>
-                                        <?php foreach ($comments as $comment) : ?>
+                                        <?php $comments = get_comments($pdo); //функция вывода коментариев?>
 
-                                        <tr>
-                                            <td>
-                                                <img src="img/<?= $comment['image'] ?>" alt="" class="img-fluid" width="64" height="64">
-                                            </td>
-                                            <td><?php echo $comment['name'] ?></td>
-                                            <td><?= date('d/m/Y', strtotime($comment['date'])) ?></td>
-                                            <td><?= $comment['text'] ?></td>
-                                            <td>
-                                                <?php if($comment['skip'] == 1): ?>
-                                                    <form action="admin_hand.php" method="post">
-                                                        <button type="submit" name="show" value="<?php echo $comment['id']; ?>"
-                                                        class="btn btn-success">Разрешить</button>
+                                        <?php foreach ($comments as $comment) : //вывод коментариев?>
+
+                                            <tr>
+                                                <td>
+                                                    <img src="img/<?= $comment['image'] ?>" alt="" class="img-fluid" width="64" height="64">
+                                                </td>
+                                                <td><?php echo $comment['name'] ?></td>
+                                                <td><?= date('d/m/Y', strtotime($comment['date'])) ?></td>
+                                                <td><?= $comment['text'] ?></td>
+                                                <td>
+                                                    <?php if ($comment['skip'] == 1) : ?>
+                                                        <form action="admin_hand.php" method="post">
+                                                            <button type="submit" name="show" value="<?php echo $comment['id']; ?>" class="btn btn-success">Разрешить</button>
                                                         </form>
-                                                <?php else: ?>
-                                                    <form action="admin_hand.php" method="post">
-                                                        <button type="submit" name="skip" value="<?php echo $comment['id']; ?>"
-                                                        class="btn btn-warning">Запретить</button>
+                                                    <?php else : ?>
+                                                        <form action="admin_hand.php" method="post">
+                                                            <button type="submit" name="skip" value="<?php echo $comment['id']; ?>" class="btn btn-warning">Запретить</button>
                                                         </form>
-                                                <?php endif; ?>
+                                                    <?php endif; ?>
                                                     <form action="admin_hand.php" method="post">
-                                                        <button onclick="return confirm('are you sure?')" name="delete" 
-                                                        value="<?php echo $comment['id']; ?>" class="btn btn-danger">
-                                                        Удалить</button>
+                                                        <button onclick="return confirm('are you sure?')" name="delete" value="<?php echo $comment['id']; ?>" class="btn btn-danger">
+                                                            Удалить</button>
                                                     </form>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
                                         <?php endforeach ?>
                                     </tbody>
                                 </table>

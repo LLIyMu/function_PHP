@@ -1,11 +1,5 @@
 <?php require_once('header.php'); ?>
-<?php
-//вывод комментариев
 
-//Объединяю таблицы для вывода имени аторизованного пользователя, текста и даты комментария  
-$comments = $pdo->query('SELECT form.*, users.name, users.image FROM form LEFT JOIN users ON form.user_id = users.id ORDER BY form.id DESC')->fetchAll();
-
-?>
 <main class="py-4">
     <div class="container">
         <div class="row justify-content-center">
@@ -33,7 +27,10 @@ $comments = $pdo->query('SELECT form.*, users.name, users.image FROM form LEFT J
                             }
                             ?>
                         </div>
-
+                        <?php
+                        //вывод коментариев
+                        $comments = get_comments($pdo);//функция вывода коментариев 
+                        ?>
                         <?php foreach ($comments as $comment) :  if ($comment['skip'] !== 1) : ?>
                                 <div class="media">
                                     <img src="img/<?= $comment['image'] ?>" class="mr-3" alt="..." width="64" height="64">

@@ -188,13 +188,13 @@ if (!isset($_COOKIE['email'])) {
                                     </div>
 
                                     <?php unset($_SESSION['pass_succes']); ?>
-                                <?php elseif (isset($_SESSION['passErr'])) :  ?>
+                                <?php elseif (isset($_SESSION['pass_err'])) :  ?>
 
                                     <div class="alert alert-danger" role="alert">
-                                        <?= $_SESSION['passErr']; ?>
+                                        <?= $_SESSION['pass_err']; ?>
                                     </div>
 
-                                <?php unset($_SESSION['passErr']);
+                                <?php unset($_SESSION['pass_err']);
                                 endif; ?>
                                 <form action="profile_hand_password.php" method="post">
                                     <div class="row">
