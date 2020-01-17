@@ -19,8 +19,7 @@ if (!isset($_COOKIE['email'])) {
     $role = $_COOKIE['role'];
 }
 if (!isset($email) || (isset($email) && $role != 1)) {
-    header('location:/');
-    exit;
+    redirect('index.php');
 }
 ?>
 <!DOCTYPE html>

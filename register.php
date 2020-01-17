@@ -56,17 +56,17 @@ require_once('header.php');
 
                                         <div class="col-md-6">
                                             <input id="password" type="password" class="form-control 
-                                             <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="password" autocomplete="new-password" required>
+                                        <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="password" autocomplete="new-password" required>
 
-                                            <? if (isset($_SESSION['passErr'])) : ?>
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>
-                                                        <?= $_SESSION['passErr']; ?>
-                                                    </strong>
-                                                </span>
-                                            <? unset($_SESSION['passErr']);
-                                            endif;
-                                            ?>
+                                        <? if (isset($_SESSION['passErr'])) : ?>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>
+                                                    <?= $_SESSION['passErr']; ?>
+                                                </strong>
+                                            </span>
+                                        <? unset($_SESSION['passErr']);
+                                        endif;
+                                        ?>
                                         </div>
                                     </div>
 

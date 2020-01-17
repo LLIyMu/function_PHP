@@ -7,6 +7,11 @@ function dd($var, $die = true) { //функция для выявления ош
     if ($die) die;
 }
 
+function redirect($url) {
+    header ('location: /' .$url);
+    exit;
+}
+
 function getComments($pdo) {//функция вывода комментариев
 
     //Объединяю таблицы для вывода имени аторизованного пользователя, текста и даты комментария 
@@ -16,7 +21,64 @@ function getComments($pdo) {//функция вывода комментарие
      return $comments;
 }
 
-function getMessage() {//функция вывода сообщений
+function requestData($request) {
+    
+        $data = [];
+        foreach ($request as $key => $value) {
+            if ($key == 'password') {
+                $data['passHash'] = password_hash($value, PASSWORD_DEFAULT);
+                //continue;
+            }
+            $data[$key] = htmlentities(trim($value));
+        }
+        //dd($data);
+    return $data;
+}
+
+// Функция ззагрузки изображения, принимает $image = $_FILES, $image_user = $_SESSION['image']
+function img_upload($image, $image_user, $validate)
+{
+    //dd($image);
+    if (!$validate) { // Если НЕ валидация
+        return false; // Возвращаем false
+    }
+    if (!empty($image['name'])) { // Если существует $image
+
+        $uploadDir = __DIR__ . '\\img\\'; // Создаю дерикторию файла
+
+        $avialabelExtention = ['jpg', 'svg', 'png', 'gif']; // Массив с допустимыми расширениями
+
+        $extention = pathinfo($image['name'], PATHINFO_EXTENSION); // Получаю расширение файла
+
+        $filename = uniqid() . "." . $extention; // Задаю уникальное имя файла и присваиваю его переменной
+
+
+        if ($_FILES['image']['error'] > 0 && $_FILES['image']['error'] != 4) {
+
+            $_SESSION['errImg'] = 'При загрузке произошла ошибка';
+            return false;
+        }
+
+        if (!in_array($extention, $avialabelExtention)) {
+
+            $_SESSION['errImg'] = 'Неверное расширение, для загрузки используйте: ' . implode(', ', $avialabelExtention);
+            return false;
+        }
+
+
+        if ($image_user != 'no-user.jpg') {
+
+            unlink($uploadDir . $image_user);
+        }
+        move_uploaded_file($image['tmp_name'], 'img/' . $filename);
+
+        return $filename;
+    }
+
+    return $_SESSION['user_img'];
+}
+
+/* function getMessage() {//функция вывода сообщений
     $message = false;
     
     if (   isset($_SESSION['alert']) || isset($_SESSION['text'])
@@ -31,66 +93,13 @@ function getMessage() {//функция вывода сообщений
     }
 }
 
-function textMessage()
+function textMessage($key)
     {
-        $text = false;
-        if (isset($_SESSION['alert'])){
-            echo $_SESSION['alert'];
-            unset($_SESSION['alert']);
-            $text = true;
+        
+        if (isset($_SESSION[$key])){
+            echo $_SESSION[$key];
+            unset($_SESSION[$key]);
+            
         }
-        $text = false;
-        if (isset($_SESSION['text'])){
-            echo $_SESSION['text'];
-            unset($_SESSION['text']);
-            $text = true;
-        }
-        $text = false;
-        if (isset($_SESSION['success'])){
-            echo $_SESSION['success'];
-            unset($_SESSION['success']);
-            $text = true;
-        }
-        $text = false;
-        if (isset($_SESSION['emailErr'])){
-            echo $_SESSION['emailErr'];
-            unset($_SESSION['emailErr']);
-            $text = true;
-        }
-        $text = false;
-        if (isset($_SESSION['passErr'])){
-            echo $_SESSION['passErr'];
-            unset($_SESSION['passErr']);
-            $text = true;
-        }
-        $text = false;
-        if (isset($_SESSION['passSucces'])){
-            echo $_SESSION['passSucces'];
-            unset($_SESSION['passSucces']);
-            $text = true;
-        }
-        $text = false;
-        if (isset($_SESSION['errImg'])){
-            echo $_SESSION['errImg'];
-            unset($_SESSION['errImg']);
-            $text = true;
-        }
-        $text = false;
-        if (isset($_SESSION['successName'])){
-            echo $_SESSION['successName'];
-            unset($_SESSION['successName']);
-            $text = true;
-        }
-        $text = false;
-        if (isset($_SESSION['nameErr'])){
-            echo $_SESSION['nameErr'];
-            unset($_SESSION['nameErr']);
-            $text = true;
-        }
-        $text = false;
-        if (isset($_SESSION['loginErr'])){
-            echo $_SESSION['loginErr'];
-            unset($_SESSION['loginErr']);
-            $text = true;
-        }
-    }
+       
+    } */

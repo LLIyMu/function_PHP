@@ -12,61 +12,9 @@ $image_user = $_SESSION['user_img'];
 
 $validate = 1; // переменная состояния валидации
 
-function check_email($pdo, $email)           // функция проверки информации о пользователе из БД
-{          
-    $sql_get = 'SELECT email FROM users'; //Формирую запрос к БД
-    $stmt_get = $pdo->prepare($sql_get);      //Подготавливаю запрос (защита от sql-инъекций), выполняем его 
-    $stmt_get->execute(); //связываю переменные
-    while ($result = $stmt_get->fetch()) {
-        if ($result['email'] == $email && $result['email'] != $_SESSION['email']) {
-            return true;
-        }
-    }   
-    return false;                           // возвращаю результат
-}
-
-// Функция ззагрузки изображения, принимает $image = $_FILES, $image_user = $_SESSION['image']
-function img_upload($image, $image_user, $validate) {
-    //dd($image);
-    if (!$validate) { // Если НЕ валидация
-        return false; // Возвращаем false
-    }
-    if (!empty($image['name'])) {// Если существует $image
-
-    $uploadDir = __DIR__ . '\\img\\'; // Создаю дерикторию файла
-    
-    $avialabelExtention = ['jpg', 'svg', 'png', 'gif']; // Массив с допустимыми расширениями
-
-    $extention = pathinfo($image['name'], PATHINFO_EXTENSION); // Получаю расширение файла
-    
-    $filename = uniqid() . "." . $extention; // Задаю уникальное имя файла и присваиваю его переменной
-    
-
-    if ($_FILES['image']['error'] > 0 && $_FILES['image']['error'] != 4) {
-
-        $_SESSION['errImg'] = 'При загрузке произошла ошибка';
-        return false;
-    } 
-
-    if (!in_array($extention , $avialabelExtention)) {
-
-        $_SESSION['errImg'] = 'Неверное расширение, для загрузки используйте: ' . implode(', ' , $avialabelExtention);
-        return false;
-    } 
+require_once 'validation/checkUser.php';
 
 
-    if ($image_user != 'no-user.jpg') {
-            
-        unlink($uploadDir . $image_user);    
-    }
-    move_uploaded_file($image['tmp_name'], 'img/' . $filename); 
-    
-    return $filename;
-    }
-
-    return $_SESSION['user_img'];
-
-}
 
 if (empty($name) || isset($_SESSION['name'])) { //если поле пустое ИЛИ есть сессия с именем пользователя
     
@@ -140,5 +88,4 @@ if($validate == 1) { //если валидация пройдена (true)
                                                              //картинки полученное из БД   
     }
 }
-header('location: /profile.php'); // редирект 
-exit;
+redirect('profile.php');

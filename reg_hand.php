@@ -23,34 +23,36 @@ if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)) 
 
         if(strLen($name) < 5) { // проверка на минимальное количество символов
         $_SESSION['nameErr'] = 'Не меньше 5 символов';
-        header('location:/register.php');
-        
-        exit;
-    
+
+        redirect('register.php');
     }   // проверяю ввод email на допустимые символы
         elseif (!preg_match('#^([a-z0-9_.-]{1,20}+)@([a-z0-9_.-]+)\.([a-z\.]{2,10})$#', $email)) {
          
         $_SESSION['emailErr'] = 'Укажите правильный email';
-        header('location:/register.php');
-        exit;
-        
+
+        redirect('register.php');
+
     } elseif ($stmt_check->fetchColumn()) { //проверяю email на уже существующий
         $_SESSION['emailErr'] = 'Такой email уже зарегистрирован ранее';
-        header('location:/register.php');
-        exit;
+
+        redirect('register.php');
+
     } elseif (strLen($password) < 6) { // проверка на минимальное количество символов
         $_SESSION['passErr'] = 'Пароль меньше 6 символов';
-        header('location:/register.php');
-        exit;
+
+        redirect('register.php');
+
     } elseif (strLen($pass_conf) < 6) { // проверка на минимальное количество символов
         $_SESSION['passErr'] = 'Пароль меньше 6 символов';
-        header('location:/register.php');
-        exit;
+
+        redirect('register.php');
+
     } elseif ($password !== $pass_conf) { //проверяю совпадают ли пароли
         
         $_SESSION['passErr'] = 'Пароли не совпадают';
-        header('location:/register.php');
-        exit;
+
+        redirect('register.php');
+        
     } else {
         //Вставляем введенныую пользователем информацию в БД.
         $sql = 'INSERT INTO `users` (`name`, `email`, `password`, `image`, `role`) VALUES (:name, :email, :password, :image, :role)';

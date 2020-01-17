@@ -4,9 +4,9 @@ require_once 'db.php';
 require_once 'function.php';
 ?>
 <?php
+//Если не сушествует пользователя, редирект на главную
 if (!isset($_SESSION['email'])) {
-    header('location:/');
-    exit;
+    redirect('index.php');
 }
 //Если  не существует куки записываем в сессию данные
 if (!isset($_COOKIE['email'])) {

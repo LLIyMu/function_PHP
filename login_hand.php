@@ -1,21 +1,14 @@
 <?php
 error_reporting(-1);//Вывод сообщений о всех возможных ошибках
-require_once('db.php');
-require_once('function.php');
+require_once 'db.php' ;
+require_once 'function.php' ;
+require_once 'validation/checkUser.php' ;
 
 $email = htmlentities(trim($_POST['email']));         // получаю email
 $password = htmlentities(trim($_POST['password']));   // получаю пароль
 $remeber_me = htmlentities(trim($_POST['remember'])); // получаю данные о нажатом чек боксе
 
 $validate = 1; // переменная состояния валидации
-
-function check_user($pdo, $email) {           // функция проверки информации о пользователе из БД
-    $sql_get = 'SELECT * FROM users WHERE email = :email'; //Формирую запрос к БД
-    $stmt_get = $pdo->prepare($sql_get);      //Подготавливаю запрос (защита от sql-инъекций), выполняем его 
-    $stmt_get->execute([':email' => $email]); //связываю переменные
-    $result = $stmt_get->fetch();             // присваиваю данные из БД переменной, получаю их в ввиде ассоц массива
-    return $result;                           // возвращаю результат
-}
 
 // Проверка email на допустимые символы
 if (!preg_match('#^([a-z0-9_.-]{1,20}+)@([a-z0-9_.-]+)\.([a-z\.]{2,10})$#', $email)) {
@@ -63,11 +56,9 @@ if ($validate == 1) {  //Валидация true
                                                                     // если нажата кнопка запомнить меня
             
         }
-        header('location: /'); // Редирект на главную при условии успешной авторизации
-        exit;
+        redirect('index.php');
     } 
     $_SESSION['emailErr'] = 'Неверный email или пароль';
     
 }
-header('location:/login.php'); // редирект при ошибке ввода или введении неверных данных
-exit;
+redirect('login.php');
