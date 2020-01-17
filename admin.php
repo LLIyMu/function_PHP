@@ -115,7 +115,7 @@ if (!isset($email) || (isset($email) && $role != 1)) {
                                     </thead>
 
                                     <tbody>
-                                        <?php $comments = get_comments($pdo); //функция вывода коментариев?>
+                                        <?php $comments = getComments($pdo); //функция вывода коментариев?>
 
                                         <?php foreach ($comments as $comment) : //вывод коментариев?>
 

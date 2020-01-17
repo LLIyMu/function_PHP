@@ -6,30 +6,25 @@
             <div class="col-md-12">
                 <div class="card">
                     <!-- сообщение об успешной авторизации -->
-                    <?php if (isset($_SESSION['success'])) : ?>
+                    <?php if(getMessage()): ?>
                         <div class="alert alert-success" role="alert">
-                            <?= $_SESSION['success']; ?>
+                            <?php textMessage() ?>
                         </div>
-                    <? unset($_SESSION['success']);
-                    endif; ?>
-
+                    <?php endif; ?>
                     <div class="card-header">
                         <h3>Комментарии</h3>
                     </div>
 
                     <div class="card-body">
                         <!-- Если сессия пустая добавляю класс d-none для скрытия этого флеш сообщения -->
-                        <div class="alert alert-success <? if (empty($_SESSION['alert'])) : echo 'd-none' ?><? endif; ?>" role="alert">
+                        <div class="alert alert-success <? if (empty(getMessage())): echo 'd-none'?><? endif; ?>" role="alert">
                             <? //Добавляю сообщение о добавлении комментария
-                            if (isset($_SESSION['alert'])) { //Если сессия существует вывожу сообщение
-                                echo $_SESSION['alert'];     //Вывод сообщения
-                                unset($_SESSION['alert']);   //Закрываю сессию
-                            }
+                                (textMessage());
                             ?>
                         </div>
                         <?php
                         //вывод коментариев
-                        $comments = get_comments($pdo);//функция вывода коментариев 
+                        $comments = getComments($pdo);//функция вывода коментариев 
                         ?>
                         <?php foreach ($comments as $comment) :  if ($comment['skip'] !== 1) : ?>
                                 <div class="media">
@@ -65,10 +60,7 @@
                                     <textarea name="text" class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
                                     <div class="alert alert-danger <? if (empty($_SESSION['text'])) : echo 'd-none' ?><? endif; ?> " role="alert">
                                         <? //Add alert message user
-                                        if (isset($_SESSION['text'])) {
-                                            echo $_SESSION['text'];
-                                            unset($_SESSION['text']);
-                                        }
+                                        textMessage();
                                         ?>
                                     </div>
                                 </div>

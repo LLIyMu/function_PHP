@@ -61,7 +61,7 @@ if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)) 
         exit;
     }
 } else {
-    $_SESSION['loginErr'] = 'Заполните обязательные поля';
+    $_SESSION['nameErr'] = 'Заполните обязательные поля';
     exit;
 }
 /* 1. Получаем данные из полей
