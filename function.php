@@ -38,16 +38,11 @@ function requestData($request) {
 
 function errMessage($message) {
 
-    $data = [];
-    foreach ($message as $key => $value)
-     if (isset($_SESSION['nameErr'])) : ?>
-        <span class="invalid-feedback" role="alert">
-            <strong>
-                <?= $_SESSION['nameErr']; ?>
-            </strong>
-        </span>
-    <? unset($_SESSION['nameErr']);
-    endif;
+    if (isset($_SESSION[$message])) {
+        
+        echo "<span class='invalid-feedback' role='alert'><strong> {$_SESSION[$message]} </strong></span>";
+        unset($_SESSION[$message]);
+    }
     
 }
 

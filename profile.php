@@ -118,30 +118,21 @@ if (!isset($_COOKIE['email'])) {
                                                 <label for="exampleFormControlInput1">Новое имя</label>
                                                 <input type="text" class="form-control <? if (isset($_SESSION['nameErr'])) : ?> is-invalid<? endif; ?>" name="name" id="exampleFormControlInput1" value="<?php echo $_SESSION['name'] ?>">
 
-                                                    <?php errMessage(['nameErr']); ?>
+                                                    <?php errMessage('nameErr'); ?>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Изменить Email</label>
                                                 <input type="text" class="form-control <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" value="<?php echo $_SESSION['email']; ?>">
 
-
-                                                    <?php errMessage($_SESSION['emailErr']); ?>
+                                                    <?php errMessage('emailErr'); ?>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Добавить аватар</label>
                                                 <input type="file" class="form-control <? if (isset($_SESSION['errImg'])) : ?>is-invalid<? endif; ?>" name="image" id="exampleFormControlInput1">
 
-                                                <? if (isset($_SESSION['errImg'])) : ?>
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>
-                                                            <?= $_SESSION['errImg']; ?>
-                                                        </strong>
-                                                    </span>
-                                                <? unset($_SESSION['errImg']);
-                                                endif;
-                                                ?>
+                                                    <?php errMessage('errImg'); ?>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -170,26 +161,25 @@ if (!isset($_COOKIE['email'])) {
                                         <?= $_SESSION['passSucces']; ?>
                                     </div>
 
-                                    <?php unset($_SESSION['passSucces']); ?>
-                                <?php elseif (isset($_SESSION['passErr'])) :  ?>
-
-                                    <div class="alert alert-danger" role="alert">
-                                        <?= $_SESSION['passErr']; ?>
-                                    </div>
-
-                                <?php unset($_SESSION['passErr']);
-                                endif; ?>
+                                    <?php unset($_SESSION['passSucces']); 
+                                    endif;
+                                    ?>
+                        
                                 <form action="profile_hand_password.php" method="post">
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Current password</label>
-                                                <input type="password" name="passCur" class="form-control" id="exampleFormControlInput1">
+                                                <input type="password" name="passCur" class="form-control <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" id="exampleFormControlInput1">
+                                                    
+                                                    <?php errMessage('passErr'); ?>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">New password</label>
-                                                <input type="password" name="password" class="form-control" id="exampleFormControlInput1">
+                                                <input type="password" name="password <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" class="form-control" id="exampleFormControlInput1">
+                                                 
+                                                    <?php errMessage('passErr'); ?>
                                             </div>
 
                                             <div class="form-group">

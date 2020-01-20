@@ -1,4 +1,4 @@
-<?php require_once('header.php'); ?>
+<?php require_once 'header.php'; ?>
 <?php require_once 'function.php' ?>
         <main class="py-4">
             <div class="container">
@@ -16,15 +16,8 @@
                                         <div class="col-md-6">
                                             <input id="email" type="text" class="form-control
                                              <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" autocomplete="email" autofocus>
-                                            <?php if (isset($_SESSION['emailErr'])) : ?>
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>
-                                                        <?= $_SESSION['emailErr']; ?>
-                                                    </strong>
-                                                </span>
-                                            <?php unset($_SESSION['emailErr']);
-                                            endif;
-                                            ?>
+                                            
+                                                <?php errMessage('emailErr'); ?>
                                         </div>
                                     </div>
 
@@ -34,15 +27,8 @@
                                         <div class="col-md-6">
                                             <input id="password" type="password" class="form-control
                                              <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="password" autocomplete="current-password">
-                                            <?php if (isset($_SESSION['passErr'])) : ?>
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>
-                                                        <?= $_SESSION['passErr']; ?>
-                                                    </strong>
-                                                </span>
-                                            <?php unset($_SESSION['passErr']);
-                                            endif;
-                                            ?>
+                                            
+                                                <?php errMessage('passErr'); ?>
                                         </div>
                                     </div>
 
