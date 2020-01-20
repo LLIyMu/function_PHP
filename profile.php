@@ -118,15 +118,7 @@ if (!isset($_COOKIE['email'])) {
                                                 <label for="exampleFormControlInput1">Новое имя</label>
                                                 <input type="text" class="form-control <? if (isset($_SESSION['nameErr'])) : ?> is-invalid<? endif; ?>" name="name" id="exampleFormControlInput1" value="<?php echo $_SESSION['name'] ?>">
 
-                                                <? if (isset($_SESSION['nameErr'])) : ?>
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>
-                                                            <?= $_SESSION['nameErr']; ?>
-                                                        </strong>
-                                                    </span>
-                                                <? unset($_SESSION['nameErr']);
-                                                endif;
-                                                ?>
+                                                    <?php errMessage(['nameErr']); ?>
                                             </div>
 
                                             <div class="form-group">
@@ -134,15 +126,7 @@ if (!isset($_COOKIE['email'])) {
                                                 <input type="text" class="form-control <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" value="<?php echo $_SESSION['email']; ?>">
 
 
-                                                <? if (isset($_SESSION['emailErr'])) : ?>
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>
-                                                            <?= $_SESSION['emailErr']; ?>
-                                                        </strong>
-                                                    </span>
-                                                <? unset($_SESSION['emailErr']);
-                                                endif;
-                                                ?>
+                                                    <?php errMessage($_SESSION['emailErr']); ?>
                                             </div>
 
                                             <div class="form-group">
@@ -161,8 +145,7 @@ if (!isset($_COOKIE['email'])) {
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <img src="img/<?php echo $image_user; //$_SESSION['user_img']; 
-                                                            ?>" alt="" class="img-fluid">
+                                            <img src="img/<?php echo $image_user; ?>" alt="" class="img-fluid">
                                         </div>
 
                                         <div class="col-md-12">
@@ -201,7 +184,7 @@ if (!isset($_COOKIE['email'])) {
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Current password</label>
-                                                <input type="password" name="pass_cur" class="form-control" id="exampleFormControlInput1">
+                                                <input type="password" name="passCur" class="form-control" id="exampleFormControlInput1">
                                             </div>
 
                                             <div class="form-group">
@@ -211,7 +194,7 @@ if (!isset($_COOKIE['email'])) {
 
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Password confirmation</label>
-                                                <input type="password" name="pass_conf" class="form-control" id="exampleFormControlInput1">
+                                                <input type="password" name="passConfirm" class="form-control" id="exampleFormControlInput1">
                                             </div>
 
                                             <button class="btn btn-success">Submit</button>

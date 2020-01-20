@@ -75,7 +75,7 @@ require_once('header.php');
 
                                         <div class="col-md-6">
                                             <input id="password-confirm" type="password" class="form-control
-                                             <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="pass_confirm" autocomplete="new-password" required>
+                                             <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="passConfirm" autocomplete="new-password" required>
                                             <? if (isset($_SESSION['passErr'])) : ?>
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>

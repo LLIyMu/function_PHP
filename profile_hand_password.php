@@ -8,24 +8,22 @@ $email = $_SESSION['email'];
 $user_id = $_SESSION['user_id'];
 
 //dd(requestData($_POST));
+//вызываю функцию которая обрабатывает массив $_POST применяется htmlentities и trim,
+// туда попадает старый пароль , новый пароль, хешируется новый пароль 
 extract(requestData($_POST));
 
-/* $pass_cur = htmlentities(trim($_POST['pass_cur'])); //Получаю старый пароль пользователя.
-$password = htmlentities(trim($_POST['password'])); //Получаю новый пароль.
-$pass_conf = htmlentities(trim($_POST['pass_conf'])); //Подтверждаю новый пароль. */
-//$passHash = password_hash($password, PASSWORD_DEFAULT); //Хэширую пароль.
 
 $validate = 1; // переменная состояния валидации
 
 require_once 'validation/checkUser.php';
 //Проверяю поля формы на пустоту
-if (!empty($pass_cur) && !empty($password) && !empty($pass_conf)) {
+if (!empty($passCur) && !empty($password) && !empty($passConfirm)) {
 
     
     $result_user = check_user($pdo, $email); //Передаю параметры функции, что бы получить существующего пользователя
 
     //Если введённый пароль совпадает с паролем из сессии
-    if ($result_pass = password_verify($pass_cur, $result_user['password'])) {
+    if ($result_pass = password_verify($passCur, $result_user['password'])) {
 
         //Проверка пароля на количество символов
         if (strlen($password) < 6) {
@@ -34,7 +32,7 @@ if (!empty($pass_cur) && !empty($password) && !empty($pass_conf)) {
             redirect('profile.php');                 //Редирект обратно
         } 
 
-        if ($password !== $pass_conf) {
+        if ($password !== $passConfirm) {
 
             $_SESSION['passErr'] = 'Пароли не совпадают';// Сообщение об ощибке
             redirect('profile.php');            //Редирект обратно

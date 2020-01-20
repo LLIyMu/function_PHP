@@ -5,8 +5,12 @@ require_once 'function.php';
 
 $data =[]; // подготавливаю переменную для динамического запроса к БД с пустым массивом
 $id = $_SESSION['user_id']; // записываю id пользователя из сессии в переменную
-$name = htmlentities(trim($_POST['name'])); // получаю имя из формы и защищаю от возможных hack атак
-$email = htmlentities(trim($_POST['email'])); // получаю email из формы и защищаю от возможных hack атак
+
+//вызываю функцию которая принимает и обрабатывает массив $_POST применяется htmlentities и trim,
+// туда попадает $name, $email а потом меняются в БД если проходят валидацию 
+extract(requestData($_POST));
+
+
 $image = $_FILES['image']; // записываю в переменную данные о полученной картинке
 $image_user = $_SESSION['user_img'];
 
@@ -14,9 +18,19 @@ $validate = 1; // переменная состояния валидации
 
 require_once 'validation/checkUser.php';
 
+if (empty($name)) {
+    $_SESSION['nameErr'] = 'имя не должно быть пустым';
+    $validate = 0;
+    redirect('profile.php');
+}
 
+if (empty($email)) {
+    $_SESSION['emailErr'] = 'email не должен быть пустым';
+    $validate = 0;
+    redirect('profile.php');
+}
 
-if (empty($name) || isset($_SESSION['name'])) { //если поле пустое ИЛИ есть сессия с именем пользователя
+if (isset($_SESSION['name'])) { //если поле пустое ИЛИ есть сессия с именем пользователя
     
     $data['name'] = $_SESSION['name']; // записываю в переменную имя из сессии
 }

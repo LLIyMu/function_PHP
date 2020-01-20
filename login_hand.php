@@ -4,9 +4,10 @@ require_once 'db.php' ;
 require_once 'function.php' ;
 require_once 'validation/checkUser.php' ;
 
-$email = htmlentities(trim($_POST['email']));         // получаю email
-$password = htmlentities(trim($_POST['password']));   // получаю пароль
-$remeber_me = htmlentities(trim($_POST['remember'])); // получаю данные о нажатом чек боксе
+//вызываю функцию которая обрабатывает массив $_POST применяется htmlentities и trim,
+// туда попадает емайл $email, и пароль $password 
+//пароль $password, и чек-бокс запомнить меня $remeberMe
+extract(requestData($_POST));
 
 $validate = 1; // переменная состояния валидации
 
@@ -47,7 +48,7 @@ if ($validate == 1) {  //Валидация true
         $_SESSION['role'] = $result_user['role'];//Записываю в сессию ROLE (админ или обычный пользователь)
         
         // Если нажат чек-бокс записываю данные в COOKIE
-        if (isset($remeber_me)) {
+        if (isset($remeberMe)) {
             setcookie('email', $result_user['email'], time() + 3600);//Записываю в куки email если нажата кнопка запомнить меня
             setcookie('name', $result_user['name'], time() + 3600);//Записываю в куки ИМЯ если нажата кнопка запомнить меня
             setcookie('user_id', $result_user['id'], time() + 3600);//Записываю в куки ID если нажата кнопка запомнить меня

@@ -2,17 +2,21 @@
 error_reporting(-1);
 require_once 'db.php';
 require_once 'function.php';
+//dd(requestData($_POST));
+//вызываю функцию которая обрабатывает массив $_POST, туда попадает имя пользователя $name, емайл  $email, 
+// новый пароль $password, проверяется введённый пароль $passConfirm, хешируется новый пароль $passHash
+extract(requestData($_POST));
 
 
-$name = htmlentities(trim($_POST['name'])); //Имя пользователя
+/* $name = htmlentities(trim($_POST['name'])); //Имя пользователя
 $email = htmlentities(trim($_POST['email'])); //Получаем email, избавляемся от пробелов с его концов, предотвращаем возможность скриптовой атаки
 $password = htmlentities(trim($_POST['password'])); //Получаю пароль.
 $passHash = password_hash($password, PASSWORD_DEFAULT); //Хэширую пароль.
-$pass_conf = htmlentities(trim($_POST['pass_confirm']));
+$pass_conf = htmlentities(trim($_POST['passConfirm'])); */
 $image = 'no-user.jpg'; //Присваиваю переменной картинку по умолчанию (заглушка)
 $role = '0';
 
-if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)) {
+if (!empty($name) && !empty($email) && !empty($passHash) && !empty($passConfirm)) {
     
     //Запрос к БД на существующий email
     $sql_check = 'SELECT EXISTS( SELECT email FROM users WHERE email = :email )';
@@ -42,12 +46,12 @@ if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)) 
 
         redirect('register.php');
 
-    } elseif (strLen($pass_conf) < 6) { // проверка на минимальное количество символов
+    } elseif (strLen($passConfirm) < 6) { // проверка на минимальное количество символов
         $_SESSION['passErr'] = 'Пароль меньше 6 символов';
 
         redirect('register.php');
 
-    } elseif ($password !== $pass_conf) { //проверяю совпадают ли пароли
+    } elseif ($password !== $passConfirm) { //проверяю совпадают ли пароли
         
         $_SESSION['passErr'] = 'Пароли не совпадают';
 
@@ -64,7 +68,7 @@ if (!empty($name) && !empty($email) && !empty($passHash) && !empty($pass_conf)) 
     }
 } else {
     $_SESSION['nameErr'] = 'Заполните обязательные поля';
-    exit;
+    redirect('register.php');
 }
 /* 1. Получаем данные из полей
 1.1. Создаем переменную для состояния валидации и по умолчанию задаем ей значение 1 или true;

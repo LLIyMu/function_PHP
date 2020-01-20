@@ -7,7 +7,7 @@ function dd($var, $die = true) { //функция для выявления ош
     if ($die) die;
 }
 
-function redirect($url) {
+function redirect($url) { // функция для редиректа на любую из заданных страниц, получает $url 
     header ('location: /' .$url);
     exit;
 }
@@ -22,17 +22,33 @@ function getComments($pdo) {//функция вывода комментарие
 }
 
 function requestData($request) {
-    
-        $data = [];
-        foreach ($request as $key => $value) {
-            if ($key == 'password') {
+    //Функцция получает данные из массива $_POST 
+        $data = []; //Объявляю пустой массив $data
+        foreach ($request as $key => $value) { //Прогоняю данные из массива через цикл, 
+                                               //что бы получить динамические данные
+            if ($key == 'password') { //Если в $key попадает $password записываю в $data хешированный пароль
                 $data['passHash'] = password_hash($value, PASSWORD_DEFAULT);
                 //continue;
             }
-            $data[$key] = htmlentities(trim($value));
+            $data[$key] = htmlentities(trim($value));//Универсальная переменная содержащая полученные данные через $_POST 
         }
         //dd($data);
     return $data;
+}
+
+function errMessage($message) {
+
+    $data = [];
+    foreach ($message as $key => $value)
+     if (isset($_SESSION['nameErr'])) : ?>
+        <span class="invalid-feedback" role="alert">
+            <strong>
+                <?= $_SESSION['nameErr']; ?>
+            </strong>
+        </span>
+    <? unset($_SESSION['nameErr']);
+    endif;
+    
 }
 
 // Функция ззагрузки изображения, принимает $image = $_FILES, $image_user = $_SESSION['image']
