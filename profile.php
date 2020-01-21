@@ -74,6 +74,7 @@ if (!isset($_COOKIE['email'])) {
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="profile.php">Профиль</a>
+                                    
                                     <!-- если в сессии есть админ, выводим для него вкладку -->
                                     <?php if ($_SESSION['role'] == 1) : ?>
                                         <a class="dropdown-item" href="admin.php">Админ панель</a>
@@ -117,21 +118,24 @@ if (!isset($_COOKIE['email'])) {
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Новое имя</label>
                                                 <input type="text" class="form-control <? if (isset($_SESSION['nameErr'])) : ?> is-invalid<? endif; ?>" name="name" id="exampleFormControlInput1" value="<?php echo $_SESSION['name'] ?>">
-
+                                                    <!-- вызываю функцию вывода сообщений о ошибке валидации
+                                                         принимает строку с названием ошибки -->
                                                     <?php errMessage('nameErr'); ?>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Изменить Email</label>
                                                 <input type="text" class="form-control <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" value="<?php echo $_SESSION['email']; ?>">
-
+                                                    <!-- вызываю функцию вывода сообщений о ошибке валидации
+                                                         принимает строку с названием ошибки -->
                                                     <?php errMessage('emailErr'); ?>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Добавить аватар</label>
                                                 <input type="file" class="form-control <? if (isset($_SESSION['errImg'])) : ?>is-invalid<? endif; ?>" name="image" id="exampleFormControlInput1">
-
+                                                    <!-- вызываю функцию вывода сообщений о ошибке валидации
+                                                         принимает строку с названием ошибки -->
                                                     <?php errMessage('errImg'); ?>
                                             </div>
                                         </div>

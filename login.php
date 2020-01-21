@@ -16,7 +16,8 @@
                                         <div class="col-md-6">
                                             <input id="email" type="text" class="form-control
                                              <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" autocomplete="email" autofocus>
-                                            
+                                                <!-- вызываю функцию вывода сообщений о ошибке валидации
+                                                         принимает строку с названием ошибки -->
                                                 <?php errMessage('emailErr'); ?>
                                         </div>
                                     </div>
@@ -27,7 +28,8 @@
                                         <div class="col-md-6">
                                             <input id="password" type="password" class="form-control
                                              <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="password" autocomplete="current-password">
-                                            
+                                                <!-- вызываю функцию вывода сообщений о ошибке валидации
+                                                         принимает строку с названием ошибки -->
                                                 <?php errMessage('passErr'); ?>
                                         </div>
                                     </div>

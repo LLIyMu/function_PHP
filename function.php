@@ -37,7 +37,8 @@ function requestData($request) {
 }
 
 function errMessage($message) {
-
+    //Функция вывода сообщений из сессии принимает строку записывает её в сессию выводит html вёрстку
+    //в нужное для меня поле, используется под полями форм для вывода ошибок
     if (isset($_SESSION[$message])) {
         
         echo "<span class='invalid-feedback' role='alert'><strong> {$_SESSION[$message]} </strong></span>";

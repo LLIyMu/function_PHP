@@ -17,8 +17,9 @@ require_once 'function.php';
 
                                         <div class="col-md-6">
                                             <input id="name" type="text" class="form-control
-                                             <? if (isset($_SESSION['nameErr'])) : ?>is-invalid<? endif; ?>" name="name" autofocus required>
-
+                                                <? if (isset($_SESSION['nameErr'])) : ?>is-invalid<? endif; ?>" name="name" autofocus required>
+                                                <!-- вызываю функцию вывода сообщений о ошибке валидации
+                                                         принимает строку с названием ошибки -->
                                                 <?php errMessage('nameErr'); ?>
                                         </div>
                                     </div>
@@ -28,8 +29,9 @@ require_once 'function.php';
 
                                         <div class="col-md-6">
                                             <input id="email" type="email" class="form-control
-                                              <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" required>
-
+                                                <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" required>
+                                                <!-- вызываю функцию вывода сообщений о ошибке валидации
+                                                         принимает строку с названием ошибки -->
                                                 <?php errMessage('emailErr'); ?>
 
                                         </div>
@@ -41,8 +43,9 @@ require_once 'function.php';
                                         <div class="col-md-6">
                                             <input id="password" type="password" class="form-control 
                                                 <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="password" autocomplete="new-password" required>
-
-                                            <?php errMessage('passErr'); ?>
+                                                    <!-- вызываю функцию вывода сообщений о ошибке валидации
+                                                         принимает строку с названием ошибки -->
+                                                <?php errMessage('passErr'); ?>
                                         </div>
                                     </div>
 
@@ -52,7 +55,8 @@ require_once 'function.php';
                                         <div class="col-md-6">
                                             <input id="password-confirm" type="password" class="form-control
                                                 <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" name="passConfirm" autocomplete="new-password" required>
-                                                
+                                                <!-- вызываю функцию вывода сообщений о ошибке валидации
+                                                         принимает строку с названием ошибки -->
                                                 <?php errMessage('passErr'); ?>
                                         </div>
                                     </div>
