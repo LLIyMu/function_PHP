@@ -64,15 +64,15 @@ if (!empty($email) && ($email != $_SESSION['email'])) { //если поле emai
   }
 }
 
-$result_email = check_email($pdo, $email); // передаю параметры в функцию и присваиваю полученные данные переменной
+$resultEmail = checkEmail($pdo, $email); // передаю параметры в функцию и присваиваю полученные данные переменной
   
-if ($result_email && isset($email)) { // если есть данные из переменной И существует введенный емайл через форму
+if ($resultEmail && isset($email)) { // если есть данные из переменной И существует введенный емайл через форму
 
     $_SESSION['emailErr'] = 'Такой email уже зарегестрирован'; //записываю сообщение в сессию
     $validate = 0; // валидация не пройдена (false)
 }
 
-if (!$img_data = img_upload($image, $image_user, $validate))  {
+if (!$img_data = imgUpload($image, $image_user, $validate))  {
     
     $validate = 0;
 } else {

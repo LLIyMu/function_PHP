@@ -26,7 +26,7 @@ function requestData($request) {
         $data = []; //Объявляю пустой массив $data
         foreach ($request as $key => $value) { //Прогоняю данные из массива через цикл, 
                                                //что бы получить динамические данные
-            if ($key == 'password') { //Если в $key попадает $password записываю в $data хешированный пароль
+            if ($key == 'newPassword') { //Если в $key попадает $password записываю в $data хешированный пароль
                 $data['passHash'] = password_hash($value, PASSWORD_DEFAULT);
                 //continue;
             }
@@ -48,7 +48,7 @@ function errMessage($message) {
 }
 
 // Функция ззагрузки изображения, принимает $image = $_FILES, $image_user = $_SESSION['image']
-function img_upload($image, $image_user, $validate)
+function imgUpload($image, $image_user, $validate)
 {
     //dd($image);
     if (!$validate) { // Если НЕ валидация
@@ -89,29 +89,3 @@ function img_upload($image, $image_user, $validate)
 
     return $_SESSION['user_img'];
 }
-
-/* function getMessage() {//функция вывода сообщений
-    $message = false;
-    
-    if (   isset($_SESSION['alert']) || isset($_SESSION['text'])
-        || isset($_SESSION['success']) || isset($_SESSION['emailErr'])
-        || isset($_SESSION['passErr']) || isset($_SESSION['passSucces'])
-        || isset($_SESSION['errImg']) || isset($_SESSION['successName']) 
-        || isset($_SESSION['nameErr']) || isset($_SESSION['loginErr'])) {
-
-            $message = true;
-
-            return $message;
-    }
-}
-
-function textMessage($key)
-    {
-        
-        if (isset($_SESSION[$key])){
-            echo $_SESSION[$key];
-            unset($_SESSION[$key]);
-            
-        }
-       
-    } */

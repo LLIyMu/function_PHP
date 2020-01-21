@@ -74,7 +74,7 @@ if (!isset($_COOKIE['email'])) {
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="profile.php">Профиль</a>
-                                    
+
                                     <!-- если в сессии есть админ, выводим для него вкладку -->
                                     <?php if ($_SESSION['role'] == 1) : ?>
                                         <a class="dropdown-item" href="admin.php">Админ панель</a>
@@ -118,25 +118,25 @@ if (!isset($_COOKIE['email'])) {
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Новое имя</label>
                                                 <input type="text" class="form-control <? if (isset($_SESSION['nameErr'])) : ?> is-invalid<? endif; ?>" name="name" id="exampleFormControlInput1" value="<?php echo $_SESSION['name'] ?>">
-                                                    <!-- вызываю функцию вывода сообщений о ошибке валидации
+                                                <!-- вызываю функцию вывода сообщений о ошибке валидации
                                                          принимает строку с названием ошибки -->
-                                                    <?php errMessage('nameErr'); ?>
+                                                <?php errMessage('nameErr'); ?>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Изменить Email</label>
                                                 <input type="text" class="form-control <? if (isset($_SESSION['emailErr'])) : ?>is-invalid<? endif; ?>" name="email" value="<?php echo $_SESSION['email']; ?>">
-                                                    <!-- вызываю функцию вывода сообщений о ошибке валидации
+                                                <!-- вызываю функцию вывода сообщений о ошибке валидации
                                                          принимает строку с названием ошибки -->
-                                                    <?php errMessage('emailErr'); ?>
+                                                <?php errMessage('emailErr'); ?>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Добавить аватар</label>
                                                 <input type="file" class="form-control <? if (isset($_SESSION['errImg'])) : ?>is-invalid<? endif; ?>" name="image" id="exampleFormControlInput1">
-                                                    <!-- вызываю функцию вывода сообщений о ошибке валидации
+                                                <!-- вызываю функцию вывода сообщений о ошибке валидации
                                                          принимает строку с названием ошибки -->
-                                                    <?php errMessage('errImg'); ?>
+                                                <?php errMessage('errImg'); ?>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -165,29 +165,29 @@ if (!isset($_COOKIE['email'])) {
                                         <?= $_SESSION['passSucces']; ?>
                                     </div>
 
-                                    <?php unset($_SESSION['passSucces']); 
-                                    endif;
-                                    ?>
-                        
+                                <?php unset($_SESSION['passSucces']);
+                                endif;
+                                ?>
+
                                 <form action="profile_hand_password.php" method="post">
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <label for="exampleFormControlInput1">Current password</label>
-                                                <input type="password" name="passCur" class="form-control <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" id="exampleFormControlInput1">
-                                                    
-                                                    <?php errMessage('passErr'); ?>
+                                                <label for="exampleFormControlInput1">Ваш пароль</label>
+                                                <input type="password" name="passCurrent" class="form-control <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" id="exampleFormControlInput1">
+
+                                                <?php errMessage('passErr'); ?>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="exampleFormControlInput1">New password</label>
-                                                <input type="password" name="password <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" class="form-control" id="exampleFormControlInput1">
-                                                 
-                                                    <?php errMessage('passErr'); ?>
+                                                <label for="exampleFormControlInput1">Новый пароль</label>
+                                                <input type="password" name="newPassword" class="form-control <? if (isset($_SESSION['passErr'])) : ?>is-invalid<? endif; ?>" id="exampleFormControlInput1">
+
+                                                <?php errMessage('passErr'); ?>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="exampleFormControlInput1">Password confirmation</label>
+                                                <label for="exampleFormControlInput1">Подтвердить пароль</label>
                                                 <input type="password" name="passConfirm" class="form-control" id="exampleFormControlInput1">
                                             </div>
 

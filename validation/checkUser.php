@@ -1,6 +1,6 @@
 <?php
 
-function check_user($pdo, $email)
+function checkUser($pdo, $email)
 {           // функция проверки информации о пользователе из БД
     $sql_get = 'SELECT * FROM users WHERE email = :email'; //Формирую запрос к БД
     $stmt_get = $pdo->prepare($sql_get);      //Подготавливаю запрос (защита от sql-инъекций), выполняем его 
@@ -9,7 +9,7 @@ function check_user($pdo, $email)
     return $result;                           // возвращаю результат
 }
 
-function check_email($pdo, $email)           // функция проверки информации о пользователе из БД
+function checkEmail($pdo, $email)           // функция проверки информации о пользователе из БД
 {
     $sql_get = 'SELECT email FROM users'; //Формирую запрос к БД
     $stmt_get = $pdo->prepare($sql_get);      //Подготавливаю запрос (защита от sql-инъекций), выполняем его 

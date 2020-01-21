@@ -7,32 +7,32 @@ require_once 'function.php';
 $email = $_SESSION['email'];
 $user_id = $_SESSION['user_id'];
 
-//dd(requestData($_POST));
+
 //вызываю функцию которая обрабатывает массив $_POST применяется htmlentities и trim,
 // туда попадает старый пароль , новый пароль, хешируется новый пароль 
 extract(requestData($_POST));
 
-
+//dd(requestData($_POST));
 $validate = 1; // переменная состояния валидации
 
 require_once 'validation/checkUser.php';
-//Проверяю поля формы на пустоту
-if (!empty($passCur) && !empty($password) && !empty($passConfirm)) {
 
+if (!empty($passCurrent) && !empty($newPassword) && !empty($passConfirm)) {
+    //Проверяю поля формы на пустоту
     
-    $result_user = check_user($pdo, $email); //Передаю параметры функции, что бы получить существующего пользователя
+    $resultUser = checkUser($pdo, $email); //Передаю параметры функции, что бы получить существующего пользователя
 
     //Если введённый пароль совпадает с паролем из сессии
-    if ($result_pass = password_verify($passCur, $result_user['password'])) {
+    if ($result_pass = password_verify($passCurrent, $resultUser['password'])) {
 
         //Проверка пароля на количество символов
-        if (strlen($password) < 6) {
+        if (strlen($passCurrent) < 6) {
 
             $_SESSION['passErr'] = 'Пароль меньше 6 символов';// Сообщение об ощибке
             redirect('profile.php');                 //Редирект обратно
         } 
 
-        if ($password !== $passConfirm) {
+        if ($newPassword !== $passConfirm) {
 
             $_SESSION['passErr'] = 'Пароли не совпадают';// Сообщение об ощибке
             redirect('profile.php');            //Редирект обратно

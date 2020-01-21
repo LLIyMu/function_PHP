@@ -1,4 +1,4 @@
-<?php require_once('header.php'); ?>
+<?php require_once 'header.php'; ?>
 
 <main class="py-4">
     <div class="container">
