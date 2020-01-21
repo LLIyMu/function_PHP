@@ -24,6 +24,13 @@ if (empty($name)) {
     redirect('profile.php');
 }
 
+if ($name == 'admin' || $name == 'ADMIN' || $name == 'moderator' || $name == 'MODERATOR') {
+    // если пользователь захотел зарегатся под именем admin
+   $_SESSION['nameErr'] = 'Недопустимое имя';
+
+   redirect('profile.php');
+}
+
 if (empty($email)) {
     $_SESSION['emailErr'] = 'email не должен быть пустым';
     $validate = 0;

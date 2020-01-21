@@ -24,7 +24,12 @@ if (!empty($name) && !empty($email) && !empty($passHash) && !empty($passConfirm)
     $stmt_check->execute([':email' => $email]);
 
     
+        if ($name == 'admin' || $name == 'ADMIN' || $name == 'moderator' || $name == 'MODERATOR') {
+             // если пользователь захотел зарегатся под именем admin
+            $_SESSION['nameErr'] = 'Недопустимое имя';
 
+            redirect('register.php');
+        }
         if(strLen($name) < 5) { // проверка на минимальное количество символов
         $_SESSION['nameErr'] = 'Не меньше 5 символов';
 
